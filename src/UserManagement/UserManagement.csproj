@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UserManagement.SDK\UserManagement.SDK.csproj" />
+    <ProjectReference Include="..\UserManagement.Services\UserManagement.Services.csproj" />
+  </ItemGroup>
+
 </Project>

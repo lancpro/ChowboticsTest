@@ -25,7 +25,7 @@ namespace UserManagement
             switch (userChoice)
             {
                 case "1":
-                    var login = new Login();
+                    Login.Start();
                     break;
                 case "2":
                     var register = new Register();
