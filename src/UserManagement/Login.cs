@@ -1,7 +1,8 @@
 ﻿namespace UserManagement
 {
-    public class Login
+    public static class Login
     {
+        //Kind of client side code for validation
 
     }
 }

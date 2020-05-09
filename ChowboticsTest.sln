@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement", "src\UserM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.SDK", "src\UserManagement.SDK\UserManagement.SDK.csproj", "{F7D85F53-339A-4B34-BAB4-564C51615C8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Services", "src\UserManagement.Services\UserManagement.Services.csproj", "{0F5FC365-3DBB-4CD7-AF75-9D0AB6F4C67A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{F7D85F53-339A-4B34-BAB4-564C51615C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7D85F53-339A-4B34-BAB4-564C51615C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7D85F53-339A-4B34-BAB4-564C51615C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F5FC365-3DBB-4CD7-AF75-9D0AB6F4C67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F5FC365-3DBB-4CD7-AF75-9D0AB6F4C67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F5FC365-3DBB-4CD7-AF75-9D0AB6F4C67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F5FC365-3DBB-4CD7-AF75-9D0AB6F4C67A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2F04A3E2-9DEB-450D-A57E-FCCDDEB204CE} = {9E5CF7C7-9018-44A3-95B9-3EFC26158232}
 		{F7D85F53-339A-4B34-BAB4-564C51615C8B} = {9E5CF7C7-9018-44A3-95B9-3EFC26158232}
+		{0F5FC365-3DBB-4CD7-AF75-9D0AB6F4C67A} = {9E5CF7C7-9018-44A3-95B9-3EFC26158232}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F06229F-A903-4208-840C-6CBADCCEF041}
