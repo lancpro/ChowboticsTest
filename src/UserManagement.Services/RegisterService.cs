@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UserManagement.Repositories;
@@ -43,18 +44,10 @@ namespace UserManagement.Services
 
         public bool IsValidPassword(string password)
         {
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                return false;
-            }
-            else if (password.Length <= 8)
-            {
-                return false;
-            }
             //Is not null of empty - Done
             //Has minimum character - Done
             //Match the password rules
-            return true;
+            return IsMatchingRules(password);
         }
 
         public bool IsValidEmailID(string emailId)
@@ -79,6 +72,20 @@ namespace UserManagement.Services
             //Is valid email id - Done
             //Is email id already exists - Done
             return true;
+        }
+
+        private bool IsMatchingRules(string password)
+        {
+            var specialCharacters = new List<char> { '!', '@', '#', '$', '*', '-', '_' };
+            if (!string.IsNullOrWhiteSpace(password)
+                && password.Length >= 8
+                && password.ToCharArray().Any(ch => Char.IsLetterOrDigit(ch))
+                && password.ToCharArray().Any(ch => specialCharacters.Contains(ch)))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
