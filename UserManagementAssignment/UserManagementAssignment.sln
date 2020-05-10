@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Repositories
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7D80179D-91EB-43AA-BE87-CB32028BD95F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Test", "tests\UserManagement.Test\UserManagement.Test.csproj", "{CF844E7C-E209-4F23-AA60-B8130DC4CCDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Test", "tests\UserManagement.Test\UserManagement.Test.csproj", "{CF844E7C-E209-4F23-AA60-B8130DC4CCDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
