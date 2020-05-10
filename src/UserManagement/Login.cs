@@ -6,9 +6,12 @@ namespace UserManagement
     public class Login
     {
         private static readonly LoginService _loginService;
+        private static readonly UserService _userService;
+
         static Login()
         {
             _loginService = new LoginService();
+            _userService = new UserService();
         }
 
         //Kind of client side UI code
@@ -21,6 +24,13 @@ namespace UserManagement
             Console.WriteLine("Please, enter a password");
             var password = Console.ReadLine();
             ValidatePassword(password);
+
+            var validationMessage = _userService.IsValidUser(userName, password)
+                ? "Valid User"
+                : "Invalid user";
+
+            Console.WriteLine(validationMessage);
+            Program.ProvideChoices();
         }
 
         private static void ValidatePassword(string password)

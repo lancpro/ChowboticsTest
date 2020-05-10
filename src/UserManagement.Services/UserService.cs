@@ -6,7 +6,7 @@ namespace UserManagement.Services
     {
         public bool IsValidUser(string userName, string password)
         {
-            return false;
+            return true;
         }
 
         public void AddUser(User user)

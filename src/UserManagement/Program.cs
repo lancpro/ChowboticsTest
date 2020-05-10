@@ -2,7 +2,7 @@
 
 namespace UserManagement
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -10,8 +10,9 @@ namespace UserManagement
             Console.ReadKey();
         }
 
-        static void ProvideChoices()
+        public static void ProvideChoices()
         {
+            Console.WriteLine();
             Console.WriteLine("Please select any one option:");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Register");
@@ -20,7 +21,7 @@ namespace UserManagement
             ValidateChoice(userChoice);
         }
 
-        static void ValidateChoice(string userChoice)
+        private static void ValidateChoice(string userChoice)
         {
             switch (userChoice)
             {
@@ -28,9 +29,14 @@ namespace UserManagement
                     Login.Start();
                     break;
                 case "2":
-                    var register = new Register();
+                    Register.Start();
+                    break;
+                case "3":
+                    //We can handle exit in better way
+                    Environment.Exit(0);
                     break;
                 default:
+                    Console.WriteLine("Invalid choice, please enter 1, 2 or 3 as your choice");
                     ProvideChoices();
                     break;
             }
