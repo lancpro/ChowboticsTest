@@ -5,8 +5,9 @@ using UserManagement.SDK;
 namespace UserManagement.Repositories
 {
 
-    //There could be multiple implementation user repository interface like SQL/Mongo repository
+    //TODO: There could be multiple implementation user repository interface like SQL/Mongo repository
     //For now I am using in memory data
+    //Please, do not modify the data as this class also used for testing
     public class InMemoryUserRepository : IUserRepository
     {
         private readonly List<User> _users;

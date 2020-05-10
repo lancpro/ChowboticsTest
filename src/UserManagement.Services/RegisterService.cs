@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UserManagement.Repositories;
 
 namespace UserManagement.Services
 {
@@ -10,44 +9,27 @@ namespace UserManagement.Services
     //Added this functionality in separate class so that we can write test case for them
     public class RegisterService
     {
-        private readonly UserService _userService;
-        public RegisterService(IUserRepository userRepository)
-        {
-            _userService = new UserService(userRepository);
-        }
-
         public bool IsValidUsername(string userName)
         {
-            //try to convert if else switch case expression
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                return false;
-            }
-            else if (userName.Length <= 8)
-            {
-                return false;
-            }
-            else if (!userName.All(ch => Char.IsLetterOrDigit(ch) || ch == '_'))
-            {
-                return false;
-            }
-            else if (_userService.IsUserNameAlreadyExists(userName))
-            {
-                return false;
-            }
-            //Is not null of empty - done
-            //Has minimum character - done
-            //does not contain special characters -done
-            //Check for existing username - done
-            return true;
+            var isUserNameRulesMatches =
+                !string.IsNullOrWhiteSpace(userName) //Non-empty string
+                && userName.Length >= 8              //Should have minimum 8 char
+                && userName.All(ch => Char.IsLetterOrDigit(ch) || ch == '_'); //Should only contain char/digit and underscore
+
+            return isUserNameRulesMatches;
         }
 
         public bool IsValidPassword(string password)
         {
-            //Is not null of empty - Done
-            //Has minimum character - Done
-            //Match the password rules
-            return IsMatchingRules(password);
+            var specialCharacters = new List<char> { '!', '@', '#', '$', '*', '-', '_' };
+            var isPasswordRuleMatch =
+                !string.IsNullOrWhiteSpace(password) // Non-empty
+                && password.Length >= 8 // Minimum 8 word password
+                && password.ToCharArray().Any(ch => Char.IsLetter(ch)) //Atleaset one character
+                && password.ToCharArray().Any(ch => Char.IsDigit(ch)) //Atlease one digit
+                && password.ToCharArray().Any(ch => specialCharacters.Contains(ch)); //Atleast one special character
+
+            return isPasswordRuleMatch;
         }
 
         public bool IsValidEmailID(string emailId)
@@ -56,36 +38,11 @@ namespace UserManagement.Services
                 @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
 
-            if (string.IsNullOrWhiteSpace(emailId))
-            {
-                return false;
-            }
-            else if (!Regex.IsMatch(emailId, emailIdRegex, RegexOptions.IgnoreCase))
-            {
-                return false;
-            }
-            else if (_userService.IsEmailIdAlreadyExists(emailId))
-            {
-                return false;
-            }
-            //Is not null or Empty - Done
-            //Is valid email id - Done
-            //Is email id already exists - Done
-            return true;
-        }
+            var isEmailRuleMatches =
+                !string.IsNullOrWhiteSpace(emailId) //Not null or empty string
+                && Regex.IsMatch(emailId, emailIdRegex, RegexOptions.IgnoreCase); //Valid email syntax
 
-        private bool IsMatchingRules(string password)
-        {
-            var specialCharacters = new List<char> { '!', '@', '#', '$', '*', '-', '_' };
-            if (!string.IsNullOrWhiteSpace(password)
-                && password.Length >= 8
-                && password.ToCharArray().Any(ch => Char.IsLetterOrDigit(ch))
-                && password.ToCharArray().Any(ch => specialCharacters.Contains(ch)))
-            {
-                return true;
-            }
-
-            return false;
+            return isEmailRuleMatches;
         }
     }
 }

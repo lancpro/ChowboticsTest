@@ -13,21 +13,21 @@ namespace UserManagement
         static Register()
         {
             var userRepository = new InMemoryUserRepository();
-            _registerService = new RegisterService(userRepository);
+            _registerService = new RegisterService();
             _userService = new UserService(userRepository);
         }
 
         public static void Start()
         {
-            Console.WriteLine("Please, enter an email-id");
+            Console.WriteLine(Message.EnterEmailID);
             var emailId = Console.ReadLine();
             ValidateEmailId(emailId);
 
-            Console.WriteLine("Please, enter an user name");
+            Console.WriteLine(Message.EnterUserName);
             var userName = Console.ReadLine();
             ValidateUserName(userName);
 
-            Console.WriteLine("Please, enter a password");
+            Console.WriteLine(Message.EnterPassword);
             var password = Console.ReadLine();
             ValidatePassword(password);
 
@@ -39,8 +39,13 @@ namespace UserManagement
         {
             if (!_registerService.IsValidEmailID(emailId))
             {
-                //print email id rules
-                Console.WriteLine("Please enter valid mail id");
+                Console.WriteLine(Message.EnterValidEmailID);
+                ValidateEmailId(Console.ReadLine());
+            }
+
+            if (_userService.IsEmailIdAlreadyExists(emailId))
+            {
+                Console.WriteLine(Message.EmailIDAlreadyExists);
                 ValidateEmailId(Console.ReadLine());
             }
         }
@@ -49,8 +54,8 @@ namespace UserManagement
         {
             if (!_registerService.IsValidPassword(password))
             {
-                //print password rules
-                Console.WriteLine("Please enter valid password");
+                Console.WriteLine(Message.PasswordRules.ToString());
+                Console.WriteLine(Message.EnterValidPassword);
                 ValidatePassword(Console.ReadLine());
             }
         }
@@ -60,7 +65,13 @@ namespace UserManagement
             if (!_registerService.IsValidUsername(userName))
             {
                 //print user name rules
-                Console.WriteLine("Please enter valid user name");
+                Console.WriteLine(Message.EnterValidUserName);
+                ValidateUserName(Console.ReadLine());
+            }
+
+            if (_userService.IsUserNameAlreadyExists(userName))
+            {
+                Console.WriteLine(Message.UserNameAlreadyExists);
                 ValidateUserName(Console.ReadLine());
             }
         }
@@ -69,7 +80,7 @@ namespace UserManagement
         {
             var user = new User(userName, password, emailId);
             _userService.AddUser(user);
-            Console.WriteLine("User registered successfully!");
+            Console.WriteLine(Message.UserRegistered);
         }
     }
 }

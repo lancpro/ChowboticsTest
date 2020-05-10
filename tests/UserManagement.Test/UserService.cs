@@ -11,7 +11,7 @@ namespace UserManagement.Test
         [SetUp]
         public void Setup()
         {
-            //To-Do: create your own in-memory data for testing
+            //ToDo: create your own in-memory data for testing
             //Right now I am using the existing in-memory data
             var userRepository = new InMemoryUserRepository();
             _userService = new Services.UserService(userRepository);

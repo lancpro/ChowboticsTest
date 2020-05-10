@@ -4,6 +4,7 @@ using UserManagement.Services;
 
 namespace UserManagement
 {
+    //Kind of client side UI code
     public class Login
     {
         private static readonly LoginService _loginService;
@@ -16,20 +17,19 @@ namespace UserManagement
             _userService = new UserService(userRepository);
         }
 
-        //Kind of client side UI code
         public static void Start()
         {
-            Console.WriteLine("Please, enter a user name");
+            Console.WriteLine(Message.EnterUserName);
             var userName = Console.ReadLine();
             ValidateUserName(userName);
 
-            Console.WriteLine("Please, enter a password");
+            Console.WriteLine(Message.EnterPassword);
             var password = Console.ReadLine();
             ValidatePassword(password);
 
             var validationMessage = _userService.IsValidUser(userName, password)
-                ? "Valid User"
-                : "Invalid user";
+                ? Message.ValidUser
+                : Message.InvalidUser;
 
             Console.WriteLine(validationMessage);
             Program.ProvideChoices();
@@ -39,7 +39,7 @@ namespace UserManagement
         {
             if (!_loginService.IsValidPassword(password))
             {
-                Console.WriteLine("Password should not be empty, please enter valid password");
+                Console.WriteLine(Message.EnterValidPassword);
                 ValidatePassword(Console.ReadLine());
             }
         }
@@ -48,7 +48,7 @@ namespace UserManagement
         {
             if (!_loginService.IsValidUsername(userName))
             {
-                Console.WriteLine("User name should not be empty, please enter valid user name");
+                Console.WriteLine(Message.EnterValidUserName);
                 ValidateUserName(Console.ReadLine());
             }
         }

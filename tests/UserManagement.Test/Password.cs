@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using UserManagement.Repositories;
 using UserManagement.Services;
 
 namespace UserManagement.Test
@@ -11,10 +10,7 @@ namespace UserManagement.Test
         [SetUp]
         public void Setup()
         {
-            //To-Do: create your own in-memory data for testing
-            //Right now I am using the existing in-memory data
-            var userRepository = new InMemoryUserRepository();
-            _registerService = new RegisterService(userRepository);
+            _registerService = new RegisterService();
         }
 
         [Test]
