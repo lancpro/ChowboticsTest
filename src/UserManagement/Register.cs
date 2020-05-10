@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using UserManagement.Repositories;
+using UserManagement.SDK;
 using UserManagement.Services;
 
 namespace UserManagement
@@ -7,11 +8,15 @@ namespace UserManagement
     public class Register
     {
         private static readonly RegisterService _registerService;
+        private static readonly UserService _userService;
 
         static Register()
         {
-            _registerService = new RegisterService();
+            var userRepository = new InMemoryUserRepository();
+            _registerService = new RegisterService(userRepository);
+            _userService = new UserService(userRepository);
         }
+
         public static void Start()
         {
             Console.WriteLine("Please, enter an email-id");
@@ -25,6 +30,9 @@ namespace UserManagement
             Console.WriteLine("Please, enter a password");
             var password = Console.ReadLine();
             ValidatePassword(password);
+
+            AddUser(userName, password, emailId);
+            Program.ProvideChoices();
         }
 
         private static void ValidateEmailId(string emailId)
@@ -33,7 +41,7 @@ namespace UserManagement
             {
                 //print email id rules
                 Console.WriteLine("Please enter valid mail id");
-                ValidatePassword(Console.ReadLine());
+                ValidateEmailId(Console.ReadLine());
             }
         }
 
@@ -57,5 +65,11 @@ namespace UserManagement
             }
         }
 
+        private static void AddUser(string userName, string password, string emailId)
+        {
+            var user = new User(userName, password, emailId);
+            _userService.AddUser(user);
+            Console.WriteLine("User registered successfully!");
+        }
     }
 }

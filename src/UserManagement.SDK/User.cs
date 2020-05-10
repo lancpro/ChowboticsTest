@@ -2,8 +2,15 @@
 {
     public class User
     {
-        public string UserName { get; set; } //Validate minimum length
-        public string Password { get; set; } // Validate password length/no. char
-        public string Email { get; set; } // Validate email address using regex
+        public string UserName { get; private set; }
+        public string Password { get; private set; }
+        public string EmailId { get; private set; }
+
+        public User(string userName, string password, string emailId)
+        {
+            UserName = userName;
+            Password = password;
+            EmailId = emailId;
+        }
     }
 }

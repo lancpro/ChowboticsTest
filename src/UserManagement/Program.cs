@@ -7,7 +7,6 @@ namespace UserManagement
         static void Main(string[] args)
         {
             ProvideChoices();
-            Console.ReadKey();
         }
 
         public static void ProvideChoices()

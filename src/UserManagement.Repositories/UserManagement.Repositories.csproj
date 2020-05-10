@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserManagement.Repositories\UserManagement.Repositories.csproj" />
     <ProjectReference Include="..\UserManagement.SDK\UserManagement.SDK.csproj" />
   </ItemGroup>
 

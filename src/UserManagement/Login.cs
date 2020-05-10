@@ -1,4 +1,5 @@
 ﻿using System;
+using UserManagement.Repositories;
 using UserManagement.Services;
 
 namespace UserManagement
@@ -10,8 +11,9 @@ namespace UserManagement
 
         static Login()
         {
+            var userRepository = new InMemoryUserRepository();
             _loginService = new LoginService();
-            _userService = new UserService();
+            _userService = new UserService(userRepository);
         }
 
         //Kind of client side UI code

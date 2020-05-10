@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UserManagement.Repositories;
 
 namespace UserManagement.Services
 {
@@ -8,8 +9,15 @@ namespace UserManagement.Services
     //Added this functionality in separate class so that we can write test case for them
     public class RegisterService
     {
+        private readonly UserService _userService;
+        public RegisterService(IUserRepository userRepository)
+        {
+            _userService = new UserService(userRepository);
+        }
+
         public bool IsValidUsername(string userName)
         {
+            //try to convert if else switch case expression
             if (string.IsNullOrWhiteSpace(userName))
             {
                 return false;
@@ -22,10 +30,14 @@ namespace UserManagement.Services
             {
                 return false;
             }
+            else if (_userService.IsUserNameAlreadyExists(userName))
+            {
+                return false;
+            }
             //Is not null of empty - done
             //Has minimum character - done
             //does not contain special characters -done
-            //Check for existing username
+            //Check for existing username - done
             return true;
         }
 
@@ -50,6 +62,7 @@ namespace UserManagement.Services
             var emailIdRegex =
                 @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+
             if (string.IsNullOrWhiteSpace(emailId))
             {
                 return false;
@@ -58,9 +71,13 @@ namespace UserManagement.Services
             {
                 return false;
             }
+            else if (_userService.IsEmailIdAlreadyExists(emailId))
+            {
+                return false;
+            }
             //Is not null or Empty - Done
             //Is valid email id - Done
-            //Is email id already exists
+            //Is email id already exists - Done
             return true;
         }
     }
